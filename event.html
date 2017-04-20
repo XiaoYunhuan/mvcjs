@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.1.1.js"></script>
+    <style>
+        #tabs li{
+            cursor:pointer;
+        }
+        .active{
+            color:yellowgreen;
+        }
+    </style>
+</head>
+<body>
+<ul id="tabs">
+    <li data-tab="users">Users</li>
+    <li data-tab="groups">Groups</li>
+</ul>
+<div id="tabsContent">
+    <div data-tab="users">我是Users</div>
+    <div data-tab="groups">我是Groups</div>
+</div>
+<script src="js/event.js"></script>
+</body>
+</html>

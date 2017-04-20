@@ -160,6 +160,7 @@ var Button = new Class;
 // });
 
 //bind()函数实现
+if(!Function.prototype.bind){
     Function.prototype.bind = function(obj){
         var slice = [].slice,
             args = slice.call(arguments, 1),
@@ -174,7 +175,7 @@ var Button = new Class;
             bound.prototype = new nop();
             return bound;
     };
-
+}
 //es5-bind()函数应用
 Button.include({
     init: function(element){
@@ -187,6 +188,21 @@ Button.include({
 var button = new Button;
 button.init('.clicky');
 
+//添加私有函数
+var Person = function(){};
+(function(){
+    var findById = function(){};
+    Person.find = function (id) {
+        if(typeof id == 'integer'){
+            return findById(id);
+        }
+    }
+})();
+(function(exports){
+    var foo = "bar";
+    //将变量暴露出去
+    exports.foo = foo;
+})(window);
 
 
 
