@@ -75,7 +75,7 @@ Model.extend({
         this.records = {};
         for(var i = 0, il = values.length; i< il; i++){
             var record = this.init(values[i]);
-            records.newRecord = false;
+            record.newRecord = false;
             this.records[record.id] = record;
         }
     }
@@ -120,9 +120,19 @@ Model.include({
     },
     toJSON: function(){
         return this.attributes();
+    },
+    createRemote: function(url, callback){
+        $.post(url, this.attributes(), callback);
+    },
+    updateRemote: function(url, callback){
+        $.ajax({
+            url: url,
+            data: this.attributes(),
+            success: callback,
+            type: "PUT"
+        });
     }
 });
-
 
 //生成随机数
 Math.guid = function(){
@@ -132,15 +142,33 @@ Math.guid = function(){
         return v.toString(16);
     }).toUpperCase()
 };
+//本地存储
+Model.LocalStorage = {
+    saveLocal: function(name){
+        var result = [];
+        for(var i in this.records){
+            result.push(this.records[i]);
+        }
+        localStorage[name] = JSON.stringify(result);
+    },
+    loadLocal: function(name){
+        var result = JSON.parse(localStorage[name]);
+        this.populate(result);
+    }
+};
 
+var Asset = Model.create();
 
- var Asset = Model.create();
+Asset.extend(Model.LocalStorage);
+
 Asset.attributes = ["name", "ext"];
 var asset = Asset.init({name: "document", ext: ".txt"});
 asset.save();
 var json = JSON.stringify(Asset.records);
 console.log(json);
 console.log(Asset.records);
+
+Asset.init({name:"jason.txt"}).createRemote("/assets");
 
 
 
