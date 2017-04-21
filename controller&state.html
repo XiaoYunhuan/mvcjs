@@ -17,11 +17,34 @@
         .over{
             background:red;
         }
+        #con1{
+            width:100px;
+            height: 100px;
+            border:1px solid green;
+            display:none;
+        }
+        #con2{
+            width:100px;
+            height: 100px;
+            border:1px solid green;
+            display:none;
+        }
+        #con1.active,#con2.active{
+            display:block;
+        }
     </style>
 </head>
 <body>
 <div id="view">我是view
     <div class="assets"></div>
+</div>
+<div id="users">
+<form>
+    <input type="search"/>
+    <input type="submit">
+    <div id="con1">我是hover的DIV1</div>
+    <div id="con2">我是hover的DIV2</div>
+</form>
 </div>
 <script src="js/jquery-3.1.1.js"></script>
 <script src="js/controller&state.js"></script>

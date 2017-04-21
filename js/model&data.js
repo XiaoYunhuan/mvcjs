@@ -168,7 +168,7 @@ var json = JSON.stringify(Asset.records);
 console.log(json);
 console.log(Asset.records);
 
-Asset.init({name:"jason.txt"}).createRemote("/assets");
+// Asset.init({name:"jason.txt"}).createRemote("/assets");
 
 
 
